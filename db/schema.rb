@@ -40,8 +40,12 @@ ActiveRecord::Schema.define(version: 2022_03_04_151410) do
     t.string "category"
     t.string "description"
     t.string "method"
+    t.bigint "asset_id", null: false
+    t.bigint "wallet_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["asset_id"], name: "index_expenses_on_asset_id"
+    t.index ["wallet_id"], name: "index_expenses_on_wallet_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,5 +69,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_151410) do
 
   add_foreign_key "assets", "wallets"
   add_foreign_key "daily_reports", "users"
+  add_foreign_key "expenses", "assets"
+  add_foreign_key "expenses", "wallets"
   add_foreign_key "wallets", "users"
 end

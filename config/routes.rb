@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :wallets, only: [:show] do
     resources :assets, only: [:create]
+    resources :expenses, only: [:create]
   end
 
 end

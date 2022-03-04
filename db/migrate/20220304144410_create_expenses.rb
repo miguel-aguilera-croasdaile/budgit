@@ -7,6 +7,8 @@ class CreateExpenses < ActiveRecord::Migration[6.1]
       t.string :category
       t.string :description
       t.string :method
+      t.references :asset, null: false, foreign_key: true
+      t.references :wallet, null: false, foreign_key: true
 
       t.timestamps
     end

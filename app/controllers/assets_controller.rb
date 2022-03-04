@@ -4,8 +4,9 @@ class AssetsController < ApplicationController
     @asset = Asset.create(asset_params)
     @asset.wallet = Wallet.find(params[:wallet_id])
     @asset.save!
+    @asset.wallet.touch
 
-    redirect_to wallet_path(@asset.wallet)
+    redirect_to "/wallet"
   end
 
   private

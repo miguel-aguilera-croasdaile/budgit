@@ -1,26 +1,71 @@
+<br>
 <div class="container">
   <h4>My Wallet</h4>
+  <hr>
   <p>Wallet ID: <%= @wallet.id %></p>
   <p>Last update: <%= @wallet.updated_at %></p>
   <p>Wallet Assets:</p>
   <% @sorted_assets.each do |asset_type_group| %>
     <% asset_type_group[1].each do |asset| %>
-    <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
+      <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
     <% end %>
   <% end %>
 </div>
-<hr>
+<br>
 <div class="container">
-  <h4>Add Asset to Wallet</h4>
-  <%= simple_form_for([@wallet, @asset]) do |f| %>
-    <%= f.error_notification %>
-    <div class="form-inputs">
-      <%= f.input :amount %>
-      <%= f.input :asset_type %>
-      <%= f.input :currency %>
+  <div class="row">
+    <div class="col-6">
+      <h4>My Assets</h4>
+      <hr>
+      <% @sorted_assets.each do |asset_type_group| %>
+        <% asset_type_group[1].each do |asset| %>
+          <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
+        <% end %>
+      <% end %>
     </div>
-    <div class="form-actions">
-      <%= f.button :submit %>
+    <div class="col-6">
+      <h4>Add Asset</h4>
+      <hr>
+      <%= simple_form_for([@wallet, @asset]) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :amount %>
+          <%= f.input :asset_type %>
+          <%= f.input :currency %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h4>My Expenses</h4>
+      <hr>
+      <% @wallet.expenses.each do |expense| %>
+        <p><%= expense %></p>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <h4>Report Expense</h4>
+      <hr>
+      <%= simple_form_for([@wallet, @expense]) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.association :asset, as: :select, collection: @wallet.assets, prompt: 'Select Asset', label_method: :collection_title, value_method: :id, label: false %>
+          <%= f.input :date %>
+          <%= f.input :amount %>
+          <%= f.input :category %>
+          <%= f.input :description %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
