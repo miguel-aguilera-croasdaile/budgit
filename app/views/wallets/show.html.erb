@@ -1,58 +1,43 @@
 <br>
 <div class="container">
-  <h4>My Wallet</h4>
-  <hr>
-  <p>Wallet ID: <%= @wallet.id %></p>
-  <p>Last update: <%= @wallet.updated_at %></p>
-  <p>Wallet Assets:</p>
-  <% @sorted_assets.each do |asset_type_group| %>
-    <% asset_type_group[1].each do |asset| %>
-      <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
-    <% end %>
-  <% end %>
-</div>
-<br>
-<div class="container">
   <div class="row">
     <div class="col-6">
-      <h4>My Assets</h4>
-      <hr>
+      <h3>My Assets</h3>
       <% @sorted_assets.each do |asset_type_group| %>
         <% asset_type_group[1].each do |asset| %>
           <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
+          <p>Last updated on <%= asset.updated_at %></p>
         <% end %>
       <% end %>
     </div>
     <div class="col-6">
-      <h4>Add Asset</h4>
-      <hr>
+      <h3>Add Asset</h3>
       <%= simple_form_for([@wallet, @asset]) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
           <%= f.input :amount %>
-          <%= f.input :asset_type %>
           <%= f.input :currency %>
+          <%= f.input :asset_type %>
         </div>
         <div class="form-actions">
-          <%= f.button :submit %>
+          <%= f.button :submit, class: "button primary-button" %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-<br>
+<hr>
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <h4>My Expenses</h4>
-      <hr>
+      <h3>My Expenses</h3>
       <% @wallet.expenses.each do |expense| %>
-        <p><%= expense %></p>
+        <p> <%= expense.currency %> <%= expense.amount %> in <%= expense.method %> paid on <%= expense.date %></p>
+        <p> <%= expense.category %>: <%= expense.description %> </p>
       <% end %>
     </div>
     <div class="col-6">
-      <h4>Report Expense</h4>
-      <hr>
+      <h3>Report Expense</h3>
       <%= simple_form_for([@wallet, @expense]) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
@@ -63,7 +48,7 @@
           <%= f.input :description %>
         </div>
         <div class="form-actions">
-          <%= f.button :submit %>
+          <%= f.button :submit, class: "button primary-button" %>
         </div>
       <% end %>
     </div>
