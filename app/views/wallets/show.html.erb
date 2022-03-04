@@ -1,22 +1,38 @@
-<br>
 <div class="container">
   <div class="row">
     <div class="col-6">
+      <br>
       <h3>My Assets</h3>
+      <br>
       <% @sorted_assets.each do |asset_type_group| %>
         <% asset_type_group[1].each do |asset| %>
-          <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
-          <p>Last updated on <%= asset.updated_at %></p>
+          <ul>
+            <li>
+              <div class="row">
+                <div class="col-6">
+                  <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
+                </div>
+                <div class="col-6 align-right">
+                  <p><%=link_to "View Expenses", wallet_asset_path(@wallet,asset) %></p>
+                </div>
+              </div>
+              <p>Last updated on <%= asset.updated_at %></p>
+            </li>
+          </ul>
         <% end %>
       <% end %>
     </div>
     <div class="col-6">
+      <br>
       <h3>Add Asset</h3>
+      <br>
       <%= simple_form_for([@wallet, @asset]) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
-          <%= f.input :amount %>
-          <%= f.input :currency %>
+          <div class="inline-fields">
+            <%= f.input :amount %>
+            <%= f.input :currency %>
+          </div>
           <%= f.input :asset_type %>
         </div>
         <div class="form-actions">
@@ -30,14 +46,22 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
+      <br>
       <h3>My Expenses</h3>
+      <br>
       <% @wallet.expenses.each do |expense| %>
-        <p> <%= expense.currency %> <%= expense.amount %> in <%= expense.method %> paid on <%= expense.date %></p>
-        <p> <%= expense.category %>: <%= expense.description %> </p>
+        <ul>
+          <li>
+            <p> <%= expense.currency %> <%= expense.amount %> in <%= expense.method %> paid on <%= expense.date %></p>
+            <p> <%= expense.category %>: <%= expense.description %> </p>
+          </li>
+        </ul>
       <% end %>
     </div>
     <div class="col-6">
+      <br>
       <h3>Report Expense</h3>
+      <br>
       <%= simple_form_for([@wallet, @expense]) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">

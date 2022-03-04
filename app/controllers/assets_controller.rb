@@ -1,5 +1,10 @@
 class AssetsController < ApplicationController
 
+  def show
+    @wallet = Wallet.find(params[:wallet_id])
+    @asset = Asset.find(params[:id])
+  end
+
   def create
     @asset = Asset.create(asset_params)
     @asset.wallet = Wallet.find(params[:wallet_id])

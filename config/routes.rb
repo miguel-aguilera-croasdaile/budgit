@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/wallet", to: "wallets#show"
 
   resources :wallets, only: [:show] do
-    resources :assets, only: [:create]
+    resources :assets, only: [:create, :show]
     resources :expenses, only: [:create]
   end
 
