@@ -1,0 +1,26 @@
+<div class="container">
+  <h4>My Wallet</h4>
+  <p>Wallet ID: <%= @wallet.id %></p>
+  <p>Last update: <%= @wallet.updated_at %></p>
+  <p>Wallet Assets:</p>
+  <% @sorted_assets.each do |asset_type_group| %>
+    <% asset_type_group[1].each do |asset| %>
+    <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
+    <% end %>
+  <% end %>
+</div>
+<hr>
+<div class="container">
+  <h4>Add Asset to Wallet</h4>
+  <%= simple_form_for([@wallet, @asset]) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :amount %>
+      <%= f.input :asset_type %>
+      <%= f.input :currency %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+</div>

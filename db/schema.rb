@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_142615) do
+ActiveRecord::Schema.define(version: 2022_03_04_151410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assets", force: :cascade do |t|
+    t.float "amount"
+    t.string "asset_type"
+    t.bigint "wallet_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "currency"
+    t.index ["wallet_id"], name: "index_assets_on_wallet_id"
+  end
+
+  create_table "daily_reports", force: :cascade do |t|
+    t.string "date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_daily_reports_on_user_id"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.string "date"
+    t.float "amount"
+    t.string "currency"
+    t.string "category"
+    t.string "description"
+    t.string "method"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +56,14 @@ ActiveRecord::Schema.define(version: 2022_03_04_142615) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_wallets_on_user_id"
+  end
+
+  add_foreign_key "assets", "wallets"
+  add_foreign_key "daily_reports", "users"
+  add_foreign_key "wallets", "users"
 end
