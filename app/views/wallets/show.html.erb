@@ -1,9 +1,13 @@
 <div class="container">
+  <h3>My Wallet</h3>
+  <p>Last updated on <%= @wallet.updated_at %></p>
+
+</div>
+<hr>
+<div class="container">
   <div class="row">
     <div class="col-6">
-      <br>
       <h3>My Assets</h3>
-      <br>
       <% @sorted_assets.each do |asset_type_group| %>
         <% asset_type_group[1].each do |asset| %>
           <ul>
@@ -23,9 +27,7 @@
       <% end %>
     </div>
     <div class="col-6">
-      <br>
       <h3>Add Asset</h3>
-      <br>
       <%= simple_form_for([@wallet, @asset]) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
@@ -46,9 +48,7 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <br>
       <h3>My Expenses</h3>
-      <br>
       <% @wallet.expenses.each do |expense| %>
         <ul>
           <li>
@@ -59,9 +59,7 @@
       <% end %>
     </div>
     <div class="col-6">
-      <br>
       <h3>Report Expense</h3>
-      <br>
       <%= simple_form_for([@wallet, @expense]) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
