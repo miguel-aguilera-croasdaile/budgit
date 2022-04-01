@@ -1,37 +1,30 @@
-<div class="container">
-  <h3>My Wallet</h3>
-  <p>Last updated on <%= @wallet.updated_at %></p>
-
-</div>
-<hr>
+<br>
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-sm-12 col-lg-6">
       <h3>My Assets</h3>
       <% @sorted_assets.each do |asset_type_group| %>
         <% asset_type_group[1].each do |asset| %>
-          <ul>
-            <li>
-              <div class="row">
-                <div class="col-6">
-                  <p><%= asset.currency %> <%= asset.amount %> in <%= asset.asset_type %></p>
-                </div>
-                <div class="col-6 align-right">
-                  <p><%=link_to "View Expenses", wallet_asset_path(@wallet,asset) %></p>
-                </div>
+          <div>
+            <div class="row">
+              <div class="col-6">
+                <p> <b> <%= asset.currency %> <%= asset.amount %> </b> in <%= asset.asset_type %></p>
+                <p>Last updated: <%= asset.updated_at %></p>
               </div>
-              <p>Last updated on <%= asset.updated_at %></p>
-            </li>
-          </ul>
+              <div class="col-6 align-right">
+                <p><%=link_to "View Expenses", wallet_asset_path(@wallet,asset) %></p>
+              </div>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </div>
-    <div class="col-6">
+    <div class="col-sm-12 col-lg-6">
       <h3>Add Asset</h3>
       <%= simple_form_for([@wallet, @asset]) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
-          <div class="inline-fields">
+          <div class="inline-fields half-width">
             <%= f.input :amount %>
             <%= f.input :currency %>
           </div>
@@ -44,18 +37,18 @@
     </div>
   </div>
 </div>
+<br>
 <hr>
+<br>
 <div class="container">
   <div class="row">
     <div class="col-6">
       <h3>My Expenses</h3>
       <% @wallet.expenses.each do |expense| %>
-        <ul>
-          <li>
-            <p> <%= expense.currency %> <%= expense.amount %> in <%= expense.method %> paid on <%= expense.date %></p>
-            <p> <%= expense.category %>: <%= expense.description %> </p>
-          </li>
-        </ul>
+        <div>
+          <p> <%= expense.currency %> <%= expense.amount %> in <%= expense.method %> paid on <%= expense.date %></p>
+          <p> <%= expense.category %>: <%= expense.description %> </p>
+        </div>
       <% end %>
     </div>
     <div class="col-6">
@@ -76,3 +69,4 @@
     </div>
   </div>
 </div>
+<br>

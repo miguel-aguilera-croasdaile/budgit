@@ -5,6 +5,7 @@ class CreateExpenses < ActiveRecord::Migration[6.1]
       t.float :amount
       t.string :currency
       t.string :category
+      t.string :status, default: "default"
       t.string :description
       t.string :method
       t.references :asset, null: false, foreign_key: true

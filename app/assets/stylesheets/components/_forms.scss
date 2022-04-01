@@ -1,6 +1,9 @@
 .inline-fields{
   display: flex;
   justify-content: space-between;
+  div{
+    flex-grow: 2;
+  }
 }
 
 .align-right{

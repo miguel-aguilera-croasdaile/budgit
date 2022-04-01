@@ -7,10 +7,5 @@ class WalletPolicy
   end
 
   def show?
-    user.authorized?
-  end
-
-  def update?
-    user.admin? || !wallet.published?
   end
 end

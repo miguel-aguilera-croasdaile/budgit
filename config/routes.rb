@@ -11,4 +11,9 @@ Rails.application.routes.draw do
     resources :expenses, only: [:create]
   end
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :wallets, only: [ :show ]
+    end
+  end
 end

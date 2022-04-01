@@ -1,5 +1,14 @@
 .primary-button{
-  background-color: green;
+  background-color: $blue;
   border-radius: 5px;
   color: white
+}
+
+.primary-button:hover{
+  color: white;
+  background-color: $dark-blue;
+}
+
+.full-width{
+  width: 100%;
 }
