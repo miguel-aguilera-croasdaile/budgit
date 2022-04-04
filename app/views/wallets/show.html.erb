@@ -7,11 +7,10 @@
         <% asset_type_group[1].each do |asset| %>
           <div>
             <div class="row">
-              <div class="col-6">
-                <p> <b> <%= asset.currency %> <%= asset.amount %> </b> in <%= asset.asset_type %></p>
-                <p>Last updated: <%= asset.updated_at %></p>
+              <div class="col-8">
+                <p> <b> <%= asset.currency %> <%= asset.amount %> </b> in <%= asset.asset_type %> for <%= asset.destination %></p>
               </div>
-              <div class="col-6 align-right">
+              <div class="col-4 align-right">
                 <p><%=link_to "View Expenses", wallet_asset_path(@wallet,asset) %></p>
               </div>
             </div>
@@ -29,6 +28,7 @@
             <%= f.input :currency %>
           </div>
           <%= f.input :asset_type %>
+          <%= f.input :destination %>
         </div>
         <div class="form-actions">
           <%= f.button :submit, class: "button primary-button" %>

@@ -9,7 +9,7 @@ class AssetsController < ApplicationController
     @asset = Asset.create(asset_params)
     @asset.wallet = Wallet.find(params[:wallet_id])
 
-    if Asset.where(currency: asset_params[:currency], asset_type: asset_params[:asset_type], wallet_id: @asset.wallet).exists?
+    if Asset.where(currency: asset_params[:currency], asset_type: asset_params[:asset_type], wallet_id: @asset.wallet, destination: asset_params[:destination]).exists?
       existing_asset = Asset.where(currency: asset_params[:currency], asset_type: asset_params[:asset_type])[0]
       existing_asset.update(amount: (existing_asset.amount + asset_params[:amount].to_f))
     else
@@ -23,6 +23,6 @@ class AssetsController < ApplicationController
   private
 
   def asset_params
-    params.require(:asset).permit(:amount, :asset_type, :user, :currency)
+    params.require(:asset).permit(:amount, :asset_type, :destination, :user, :currency)
   end
 end
