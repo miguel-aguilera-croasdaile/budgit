@@ -8,10 +8,10 @@
           <div>
             <div class="row">
               <div class="col-8">
-                <p> <b> <%= asset.currency %> <%= asset.amount %> </b> in <%= asset.asset_type %> for <%= asset.destination %></p>
+                <p> <b> <%= asset.currency %> <%= asset.amount %> </b> in <%= asset.asset_type %> <%= asset.destination != "" ? "for #{asset.destination}" : "" %> </p>
               </div>
               <div class="col-4 align-right">
-                <p><%=link_to "View Expenses", wallet_asset_path(@wallet,asset) %></p>
+                <%= link_to 'x', wallet_asset_path(@wallet, asset), method: :delete %>
               </div>
             </div>
           </div>

@@ -20,6 +20,13 @@ class AssetsController < ApplicationController
     redirect_to "/wallet"
   end
 
+  def destroy
+    @asset = Asset.find(params[:id])
+    @asset.destroy!
+    redirect_to '/wallet', :notice => "Your asset has been deleted"
+  end
+
+
   private
 
   def asset_params

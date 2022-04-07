@@ -1,6 +1,6 @@
 class Asset < ApplicationRecord
   belongs_to :wallet
-
+  has_many :expenses, dependent: :destroy
   validates_presence_of :currency
   validates_presence_of :amount
   validates_presence_of :asset_type
